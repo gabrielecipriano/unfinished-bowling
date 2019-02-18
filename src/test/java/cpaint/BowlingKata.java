@@ -5,77 +5,94 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class BowlingKata {
     @Test
     void shouldCalculateScoreForAllZeros() {
-        int score = Bowling.score(Arrays.asList(
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0")
-        ));
-
-        assertThat(score, is(0));
+        assertThat(scoreFor(asList(
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0")
+        )), is(0));
     }
 
     @Test
     void shouldCalculateScoreForAllOnes() {
-        int score = Bowling.score(Arrays.asList(
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0"),
-                new Frame("1", "0")
-        ));
-
-        assertThat(score, is(10));
+        assertThat(scoreFor(asList(
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0"),
+                frame("1", "0")
+        )), is(10));
     }
 
     @Test
     void shouldCalculateScoreOneSpare() {
-        int score = Bowling.score(Arrays.asList(
-                new Frame("1", "9"),
-                new Frame("1", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0")
-        ));
+        assertThat(scoreFor(asList(
+                frame("1", "9"),
+                frame("1", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0")
+        )), is(12));
 
-        assertThat(score, is(12));
+        assertThat(scoreFor(asList(
+                frame("1", "9"),
+                frame("2", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0")
+        )), is(14));
+    }
 
-        int anotherSpareGame = Bowling.score(Arrays.asList(
-                new Frame("1", "9"),
-                new Frame("2", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0"),
-                new Frame("0", "0")
-        ));
+    @Test
+    void shouldCalculateScoreOneStrike() {
+        assertThat(scoreFor(asList(
+                frame("X", "0"),
+                frame("1", "1"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0")
+        )), is(14));
+    }
 
-        assertThat(anotherSpareGame, is(14));
+    private Frame frame(String firstThrow, String secondThrow) {
+        return new Frame(firstThrow, secondThrow);
+    }
+
+    private int scoreFor(List<Frame> frames) {
+        return Bowling.score(frames);
     }
 
 }

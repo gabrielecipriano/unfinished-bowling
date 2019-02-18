@@ -10,19 +10,26 @@ public class Bowling {
         for (int i = 0; i < game.size(); i++) {
             Frame frame = game.get(i);
 
-            int pinDown = pinDownForCurrent(frame);
+            if (!isAStrike(frame)) {
+                int pinDown = pinDownForCurrent(frame);
+                if (isASpare(pinDown)) {
+                    Frame nextFrame = game.get(i + 1);
 
-            if (isASpare(pinDown)) {
-                Frame nextFrame = game.get(i + 1);
+                    score += pinDown + toInt(nextFrame.firstThrow);
 
-                score += pinDown + toInt(nextFrame.firstThrow);
-
+                } else {
+                    score += pinDown;
+                }
             } else {
-                score += pinDown;
+                score += 10 + pinDownForCurrent(game.get(i + 1));
             }
         }
 
         return score;
+    }
+
+    private static boolean isAStrike(Frame frame) {
+        return frame.firstThrow.equals("X") || frame.secondThrow.equals("X");
     }
 
     private static Integer toInt(String firstThrow) {
