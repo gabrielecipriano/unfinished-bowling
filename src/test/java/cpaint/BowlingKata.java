@@ -87,6 +87,22 @@ class BowlingKata {
         )), is(14));
     }
 
+    @Test
+    void shouldCalculateScoreASpareAfterAStrike() {
+        assertThat(scoreFor(asList(
+                frame("X", "0"),
+                frame("1", "9"),
+                frame("1", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0"),
+                frame("0", "0")
+        )), is(33));
+    }
+
     private Frame frame(String firstThrow, String secondThrow) {
         return new Frame(firstThrow, secondThrow);
     }
