@@ -3,6 +3,9 @@ package cpaint;
 import java.util.List;
 
 public class Bowling {
+
+    public static final int SCORE_FOR_A_STRIKE = 10;
+
     public static int score(List<Frame> game) {
 
         int score = 0;
@@ -21,7 +24,7 @@ public class Bowling {
                     score += pinDown;
                 }
             } else {
-                score += 10 + pinDownForCurrent(game.get(i + 1));
+                score += SCORE_FOR_A_STRIKE + pinDownForCurrent(game.get(i + 1));
             }
         }
 
