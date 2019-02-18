@@ -44,4 +44,38 @@ class BowlingKata {
 
         assertThat(score, is(10));
     }
+
+    @Test
+    void shouldCalculateScoreOneSpare() {
+        int score = Bowling.score(Arrays.asList(
+                new Frame("1", "9"),
+                new Frame("1", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0")
+        ));
+
+        assertThat(score, is(12));
+
+        int anotherSpareGame = Bowling.score(Arrays.asList(
+                new Frame("1", "9"),
+                new Frame("2", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0")
+        ));
+
+        assertThat(anotherSpareGame, is(14));
+    }
+
 }
