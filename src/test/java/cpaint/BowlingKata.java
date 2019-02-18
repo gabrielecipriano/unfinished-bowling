@@ -2,17 +2,46 @@ package cpaint;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class BowlingKata {
     @Test
     void shouldCalculateScoreForAllZeros() {
-        assertThat(Bowling.score(new String[]{"0","0","0","0","0","0","0","0","0","0"}), is(0));
+        int score = Bowling.score(Arrays.asList(
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0"),
+                new Frame("0", "0")
+        ));
+
+        assertThat(score, is(0));
     }
 
     @Test
     void shouldCalculateScoreForAllOnes() {
-        assertThat(Bowling.score(new String[]{"1","1","1","1","1","1","1","1","1","1"}), is(10));
+        int score = Bowling.score(Arrays.asList(
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0"),
+                new Frame("1", "0")
+        ));
+
+        assertThat(score, is(10));
     }
 }
